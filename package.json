@@ -1,6 +1,6 @@
 {
   "name": "bsh-token",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Wrapper for token based authentication & authorization",
   "main": "index.js",
   "scripts": {

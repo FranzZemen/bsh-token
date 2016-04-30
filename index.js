@@ -94,7 +94,7 @@
         tokenFinalTimeout = tokenFinalTimeout || finalTimeout;
         var buffer = new Array(16);
         var token = uuid.unparse(uuid.v4(null, buffer));
-        impl_.createToken(token, context, user, roles, tokenSessionTimeout, tokenFinalTimeout)
+        return impl_.createToken(token, context, user, roles, tokenSessionTimeout, tokenFinalTimeout)
             .then(function (result) {
                 log.trace({result:result, token:token},'createToken result');
                 return token;
@@ -138,7 +138,7 @@
         }
         role = role || [];
         touch = touch || false;
-        impl_.checkToken(token, role)
+        return impl_.checkToken(token, role)
             .then(function(token) {
                 if (token && touch) {
                     return module.exports.touchToken(token);
