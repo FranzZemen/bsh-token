@@ -9,7 +9,34 @@ beforeEach(function() {
 });
 
 describe('BSH Token Tests', function () {
-    it('should create a token', function () {
-        return bshToken.createToken('testContext','someUser',['all']);
+    it('should create a token', function (done) {
+        bshToken.createToken('testContext','someUser',['all'])
+          .then(function (token){
+              if (token) {
+                  done();
+              }
+          })
+    });
+    it ('should touch a created token', function (done) {
+        bshToken.createToken('testContext','someUser',['all'])
+          .then(function (token){
+              if (token) {
+                  bshToken.touchToken(token)
+                    .then(function (backToken) {
+                        done();
+                    });
+              }
+          })
+    });
+    it ('should check a created token', function (done) {
+        bshToken.createToken('testContext','someUser',['all'])
+          .then(function (token){
+              if (token) {
+                  bshToken.checkToken(token)
+                    .then(function (backToken) {
+                        done();
+                    });
+              }
+          })
     });
 });

@@ -111,12 +111,11 @@
      */
     module.exports.touchToken = function (token, tokenSessionTimeout, tokenFinalTimeout) {
         log.trace({token:token, tokenSessionTimeout: tokenSessionTimeout, tokenFinalTimeout:tokenFinalTimeout},'touchToken');
-        if (!_impl) {
+        if (!impl_) {
             throw new Error('No implementation set.  impl must be called first.');
         }
         tokenSessionTimeout = tokenSessionTimeout || sessionTimeout;
         tokenFinalTimeout = tokenFinalTimeout || finalTimeout;
-
         return impl_.touchToken(token, tokenSessionTimeout, tokenFinalTimeout)
             .then(function (result) {
                 log.trace({result:result}, 'touchToken result');
@@ -133,7 +132,7 @@
      */
     module.exports.checkToken = function (token, role, touch) {
         log.trace({token:token, role:role, touch:touch},'checkToken');
-        if (!_impl) {
+        if (!impl_) {
             throw new Error('No implementation set.  impl must be called first.');
         }
         role = role || [];
@@ -161,7 +160,7 @@
      */
     module.exports.deleteToken = function (token) {
         log.trace({token:token},'deleteToken');
-        if (!_impl) {
+        if (!impl_) {
             throw new Error('No implementation set.  impl must be called first.');
         }
         if (!deleting) {
@@ -184,7 +183,7 @@
      */
     module.exports.deleteExpiredTokens = function () {
         log.trace('deleteExpiredTokens');
-        if (!_impl) {
+        if (!impl_) {
             throw new Error('No implementation set.  impl must be called first.');
         }
         if (!deleting) {
