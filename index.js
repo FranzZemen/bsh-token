@@ -135,18 +135,17 @@
         if (!impl_) {
             throw new Error('No implementation set.  impl must be called first.');
         }
-        role = role || [];
         touch = touch || false;
         return impl_.checkToken(token, role)
-            .then(function(token) {
-                if (token && touch) {
-                    return module.exports.touchToken(token);
+            .then(function(checkedToken) {
+                if (checkedToken && touch) {
+                    return module.exports.touchToken(checkedToken);
                 } else {
-                    return token;
+                    return checkedToken;
                 }
             })
-            .then(function(token) {
-                var tokenFound = token ? true : false;
+            .then(function(checkedToken) {
+                var tokenFound = checkedToken && checkedToken === token ? true : false;
                 log.trace({tokenFound: tokenFound}, 'checkToken result');
                 return tokenFound;
             });
